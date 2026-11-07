@@ -60,7 +60,7 @@ metadata = {'application': '拾贴 / ClipShelf', 'version': version,
 
 下载与源码
 https://github.com/stzsl1991/clipshelf
-私有仓库需要登录有访问权限的 GitHub 账号下载。
+源码仓库与安装包已公开，可直接访问和下载。
 ''', encoding='utf-8')
 PY
 dmg="$output/ClipShelf-$version-macOS-arm64.dmg"

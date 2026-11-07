@@ -75,7 +75,7 @@ flowchart LR
 
 从 [GitHub Releases](https://github.com/stzsl1991/clipshelf/releases/latest) 下载 **ClipShelf-1.1.0-macOS-arm64.dmg**，打开镜像，把「拾贴.app」拖入旁边的「Applications」。更新前请先退出正在运行的拾贴。
 
-下载需要登录有此私有仓库访问权限的 GitHub 账号。安装包适用于 Apple Silicon / arm64，macOS 13 或以上；使用项目本地签名，**尚未经过 Apple Developer ID 签名或 Apple 公证**，首次打开可能需要在系统「隐私与安全性」中确认。自动粘贴及钥匙串授权说明见下文。
+仓库与安装包已公开，可直接下载。安装包适用于 Apple Silicon / arm64，macOS 13 或以上；使用项目本地签名，**尚未经过 Apple Developer ID 签名或 Apple 公证**，首次打开可能需要在系统「隐私与安全性」中确认。自动粘贴及钥匙串授权说明见下文。
 
 Release 同时提供 `SHA256SUMS.txt`，可在下载目录核验：
 
