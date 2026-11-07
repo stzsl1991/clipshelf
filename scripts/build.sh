@@ -4,7 +4,7 @@ cd "${0:A:h:h}"
 app="$PWD/build/拾贴.app"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources" build/module-cache
 xcrun swiftc -O -target arm64-apple-macos13.0 -module-cache-path "$PWD/build/module-cache" \
-  Sources/Model.swift Sources/Clipboard.swift Sources/HistoryWindow.swift Sources/SettingsWindow.swift Sources/App.swift Sources/main.swift \
+  Sources/Model.swift Sources/Clipboard.swift Sources/HistoryWindow.swift Sources/CardSupport.swift Sources/CardPicker.swift Sources/SettingsWindow.swift Sources/App.swift Sources/main.swift \
   -framework AppKit -framework Carbon -framework ApplicationServices -framework CryptoKit -framework Security -framework ServiceManagement \
   -o "$app/Contents/MacOS/ClipShelf"
 cp Resources/Info.plist "$app/Contents/Info.plist"

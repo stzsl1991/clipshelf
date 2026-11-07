@@ -32,16 +32,16 @@ fi
 /usr/bin/security unlock-keychain -p "$signing_password" "$signing_keychain"
 # No trusted-root installation or system trust setting changes. The certificate
 # only identifies this project's builds; it is not an Apple Developer ID.
-/usr/bin/python3 - "$signing_keychain" "$1" <<'PY'
+/usr/bin/python3 - "$signing_keychain" "$1" "${2:-com.shulin.ClipShelf}" <<'PY'
 import pathlib, shlex, subprocess, sys
-keychain, app = sys.argv[1:]
+keychain, app, identifier = sys.argv[1:]
 original = shlex.split(subprocess.check_output(['security', 'list-keychains', '-d', 'user'], text=True))
 try:
     # codesign still resolves identities through the search list even when a
     # keychain is specified. Restore the user's exact list after signing.
     subprocess.run(['security', 'list-keychains', '-d', 'user', '-s', *original, keychain], check=True)
     subprocess.run(['codesign', '--force', '--sign', 'Shulin ClipShelf Local Signing', '--keychain', keychain,
-                    '--timestamp=none', '--identifier', 'com.shulin.ClipShelf', app], check=True)
+                    '--timestamp=none', '--identifier', identifier, app], check=True)
 finally:
     subprocess.run(['security', 'list-keychains', '-d', 'user', '-s', *original], check=True)
 PY
