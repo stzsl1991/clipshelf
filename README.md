@@ -78,7 +78,7 @@ flowchart LR
 配置好此 Mac 的 GitHub 访问权限后执行：
 
 ```sh
-git clone git@github.com:stzsl1991/clipshelf.git
+git clone https://github.com/stzsl1991/clipshelf.git
 cd clipshelf
 ./scripts/test.sh
 ./scripts/build.sh
@@ -174,6 +174,18 @@ open build/拾贴预览.app
 ## 代码管理
 
 仓库只管理源码、图标、脚本、说明与验证记录。构建产物、本机历史、签名私钥、钥匙串文件和环境凭据不纳入版本控制。后续修改完成对应检查后提交并推送到 GitHub；其他设备可从源码构建。
+
+默认分支使用 `main`，功能修改可在独立分支进行：
+
+```sh
+git switch main
+git pull --ff-only
+git switch -c codex/feature-name
+# 修改代码并运行相应检查
+git add <本次修改的文件>
+git commit -m "说明这次改动"
+git push -u origin HEAD
+```
 
 ## 卸载
 
