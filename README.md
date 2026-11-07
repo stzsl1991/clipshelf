@@ -71,7 +71,17 @@ flowchart LR
 
 ## 安装与构建
 
-目前提供源码及本地构建方式，尚未提供 Apple 公证的下载发行包。
+### 下载编译好的安装包
+
+从 [GitHub Releases](https://github.com/stzsl1991/clipshelf/releases/latest) 下载 **ClipShelf-1.1.0-macOS-arm64.dmg**，打开镜像，把「拾贴.app」拖入旁边的「Applications」。更新前请先退出正在运行的拾贴。
+
+下载需要登录有此私有仓库访问权限的 GitHub 账号。安装包适用于 Apple Silicon / arm64，macOS 13 或以上；使用项目本地签名，**尚未经过 Apple Developer ID 签名或 Apple 公证**，首次打开可能需要在系统「隐私与安全性」中确认。自动粘贴及钥匙串授权说明见下文。
+
+Release 同时提供 `SHA256SUMS.txt`，可在下载目录核验：
+
+```sh
+shasum -a 256 -c SHA256SUMS.txt
+```
 
 需要 Apple Silicon Mac、macOS 13 或以上，以及包含 Swift 和 macOS SDK 的 Xcode Command Line Tools；脚本使用系统 `zsh`、Python 3、OpenSSL、`security` 和 `codesign`，无需第三方 Swift 依赖。已验证编译环境为 Swift 5.8、macOS SDK 13.3；当前脚本固定生成 arm64 应用，Intel 构建尚未验证。
 
@@ -148,6 +158,7 @@ scripts/                构建、安装、签名、图标与预览脚本
 | `./scripts/test.sh` | 当前 45 项检查，使用命名剪贴板，不改系统剪贴板 |
 | `./scripts/build.sh` | 编译、打包、签名并严格验证应用 |
 | `./scripts/install.sh` | 安装已构建的应用 |
+| `./scripts/package.sh` | 将已构建应用打包为 DMG，挂载核验并生成 SHA-256 校验文件 |
 | `./scripts/icon.sh` | 重新生成原生绘制图标 |
 | `./scripts/preview.sh` | 从构建产物生成独立示例预览应用 |
 | `./scripts/probe.sh` | 构建独立的跨应用粘贴验收目标 |
@@ -174,6 +185,8 @@ open build/拾贴预览.app
 ## 代码管理
 
 仓库只管理源码、图标、脚本、说明与验证记录。构建产物、本机历史、签名私钥、钥匙串文件和环境凭据不纳入版本控制。后续修改完成对应检查后提交并推送到 GitHub；其他设备可从源码构建。
+
+编译好的 DMG 与校验文件发布到 GitHub Release，不作为 Git 源码文件提交。打包方式为先执行 `./scripts/build.sh`，再执行 `./scripts/package.sh`，产物位于 `build/releases/v<版本>/`。
 
 默认分支使用 `main`，功能修改可在独立分支进行：
 
